@@ -52,9 +52,8 @@ pjax 是完全自动化的. 你只要指定用来替换的容器 就能实现页
 </html>
 ```
 
-We want pjax to grab the URL `/page/2` then replace `#pjax-container` with
-whatever it gets back. No styles or scripts will be reloaded and even the `<h1>`
-can stay the same - we just want to change the `#pjax-container` element.
+我们希望pjax 获取 URL `/page/2` 然后用返回的html片段替换 `#pjax-container`中的内容. 样式和脚本不会重载，  包括`<h1>`
+可以保留其中的内容。 - 我们仅仅想改边`#pjax-container` 元素.
 
 We do this by telling pjax to listen on `a` tags and use `#pjax-container` as the target container:
 
@@ -156,7 +155,7 @@ $(document).pjax(selector, [container], options)
 
 ##### pjax options
 
-key | default | description
+key | default | 描述
 ----|---------|------------
 `timeout` | 650 | ajax timeout in milliseconds after which a full refresh is forced
 `push` | true | use [pushState][] to add a browser history entry upon navigation
