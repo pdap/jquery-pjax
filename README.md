@@ -22,7 +22,7 @@
           `-"--'---'
 ##  中文文档
 
-[中文文档]: (./Doc_zh.md)
+[中文文档](./Doc_zh.md)
 
 ## Introduction
 
