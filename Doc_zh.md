@@ -55,19 +55,19 @@ pjax 是完全自动化的. 你只要指定用来替换的容器 就能实现页
 我们希望pjax 获取 URL `/page/2` 然后用返回的html片段替换 `#pjax-container`中的内容. 样式和脚本不会重载，  包括`<h1>`
 可以保留其中的内容。 - 我们仅仅想改边`#pjax-container` 元素.
 
-We do this by telling pjax to listen on `a` tags and use `#pjax-container` as the target container:
+我们是通过监听`#pjax-container` 容器中的 `a` 标签来实现的：
 
 ``` javascript
 $(document).pjax('a', '#pjax-container')
 ```
 
-Now when someone in a pjax-compatible browser clicks "next page" the content of `#pjax-container` will be replaced with the body of `/page/2`.
+现在如果在支持pjax的浏览器中点击 "next page" `#pjax-container`容器将会被`/page/2`请求的html片段替换。
 
 Magic! Almost. You still need to configure your server to look for pjax requests and send back pjax-specific content.
 
 The pjax ajax request sends an `X-PJAX` header so in this example (and in most cases) we want to return just the content of the page without any layout for any requests with that header.
 
-Here's what it might look like in Rails:
+在 Rails 中可能是下面的用法:
 
 ``` ruby
 def index
@@ -77,21 +77,21 @@ def index
 end
 ```
 
-If you'd like a more automatic solution than pjax for Rails check out [Turbolinks][].
+如果你需要更多pjax 与 Rails 的相关信息 请查阅 [Turbolinks][].
 
-Also check out [RailsCasts #294: Playing with PJAX][railscasts].
+或者 [RailsCasts #294: Playing with PJAX][railscasts].
 
-## Installation
+## 安装
 
 ### bower
 
-Via [Bower][]:
+通过 [Bower][]:
 
 ```
 $ bower install jquery-pjax
 ```
 
-Or, add `jquery-pjax` to your app's `bower.json`.
+或者添加 `jquery-pjax` 到你的应用下的 `bower.json`文件.
 
 ``` json
   "dependencies": {
@@ -99,29 +99,29 @@ Or, add `jquery-pjax` to your app's `bower.json`.
   }
 ```
 
-### standalone
+### 单独使用
 
-pjax can be downloaded directly into your app's public directory - just be sure you've loaded jQuery first.
+下载 jquery.pjax.js 将jquery.pjax.js 的引用直接放在Jquery之后.
 
 ```
 curl -LO https://raw.github.com/defunkt/jquery-pjax/master/jquery.pjax.js
 ```
 
-**WARNING** Do not hotlink the raw script url. GitHub is not a CDN.
+**警告** 不要直接引用上述js地址. GitHub 不是 CDN.
 
-## Dependencies
+## 依赖
 
-Requires jQuery 1.8.x or higher.
+需要 jQuery 1.8.x 或者更高版本.
 
-## Compatibility
+## 适用范围
 
-pjax only works with [browsers that support the `history.pushState`
-API][compat]. When the API isn't supported pjax goes into fallback mode:
-`$.fn.pjax` calls will be a no-op and `$.pjax` will hard load the given URL.
+pjax 仅用于 [支持 `history.pushState`
+API 的浏览器][compat]. 当这个API不支持时，进入回滚流程:
+`$.fn.pjax` 的回调函数将失效 并且 `$.pjax` 将直接进入该URL地址.
 
 For debugging purposes, you can intentionally disable pjax even if the browser supports `pushState`. Just call `$.pjax.disable()`. To see if pjax is actually supports `pushState`, check `$.support.pjax`.
 
-## Usage
+## 用法
 
 ### `$.fn.pjax`
 
@@ -141,7 +141,7 @@ Or try this selector that matches any `<a data-pjax href=>` links inside a `<div
 $(document).pjax('[data-pjax] a, a[data-pjax]', '#pjax-container')
 ```
 
-#### Arguments
+#### 参数
 
 The synopsis for the `$.fn.pjax` function is:
 
@@ -222,10 +222,9 @@ function applyFilters() {
 }
 ```
 
-### Events
+### 事件
 
-All pjax events except `pjax:click` & `pjax:clicked` are fired from the pjax
-container, not the link that was clicked.
+所有的pjax事件除了`pjax:click` 和 `pjax:clicked` ，都是通过 pjax container 容器解除绑定的, 而不是你点击的元素.
 
 <table>
 <tr>
