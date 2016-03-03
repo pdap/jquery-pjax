@@ -354,7 +354,7 @@ $(document).on('pjax:timeout', function(event) {
 })
 ```
 
-### Server side
+### 后端服务器
 
 Server configuration will vary between languages and frameworks. The following example shows how you might configure Rails.
 
