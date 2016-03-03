@@ -63,9 +63,9 @@ $(document).pjax('a', '#pjax-container')
 
 现在如果在支持pjax的浏览器中点击 "next page" `#pjax-container`容器将会被`/page/2`请求的html片段替换。
 
-Magic! Almost. You still need to configure your server to look for pjax requests and send back pjax-specific content.
+你还需要配置后台服务器，让他们根据pjax 选择性的返回html或者html片段
 
-The pjax ajax request sends an `X-PJAX` header so in this example (and in most cases) we want to return just the content of the page without any layout for any requests with that header.
+pjax  的请求会发送  `X-PJAX` 头 ，所以在这个案例中 (大多数情况下) 我们仅仅想加载容器中的部分，  所以就带这种X-PJAX 头请求.
 
 在 Rails 中可能是下面的用法:
 
@@ -119,23 +119,23 @@ pjax 仅用于 [支持 `history.pushState`
 API 的浏览器][compat]. 当这个API不支持时，进入回滚流程:
 `$.fn.pjax` 的回调函数将失效 并且 `$.pjax` 将直接进入该URL地址.
 
-For debugging purposes, you can intentionally disable pjax even if the browser supports `pushState`. Just call `$.pjax.disable()`. To see if pjax is actually supports `pushState`, check `$.support.pjax`.
+为了调试这个特性, 你可以手动干预，如果你的浏览器支持 `pushState`. 方法是调用 `$.pjax.disable()`. 想要看看pjax是支持 `pushState`方式改变URL地址, 控制台输入`$.support.pjax`.
 
 ## 用法
 
 ### `$.fn.pjax`
 
-Let's talk more about the most basic way to get started:
+最基本的使用方法:
 
 ``` javascript
 $(document).pjax('a', '#pjax-container')
 ```
 
-This will enable pjax on all links and designate the container as `#pjax-container`.
+这表示所有的a链接都应用pjax 并且 指定`#pjax-container`作为容器.
 
-If you are migrating an existing site you probably don't want to enable pjax everywhere just yet. Instead of using a global selector like `a` try annotating pjaxable links with `data-pjax`, then use `'a[data-pjax]'` as your selector.
+如果你正在迁移一个已经存在的站点，你可能不想把所有的a链接启用pjax. 那么你可以给想启用pjax的链接加上`data-pjax`属性, 然后使用`'a[data-pjax]'` 作为你的选择器.
 
-Or try this selector that matches any `<a data-pjax href=>` links inside a `<div data-pjax>` container.
+或者尝试使用这种选择器来匹配  `<div data-pjax>` 容器中的`<a data-pjax href=>`.
 
 ``` javascript
 $(document).pjax('[data-pjax] a, a[data-pjax]', '#pjax-container')
@@ -143,26 +143,26 @@ $(document).pjax('[data-pjax] a, a[data-pjax]', '#pjax-container')
 
 #### 参数
 
-The synopsis for the `$.fn.pjax` function is:
+`$.fn.pjax` 基本用法:
 
 ``` javascript
 $(document).pjax(selector, [container], options)
 ```
 
-1. `selector` is a string to be used for click [event delegation][$.fn.on].
-2. `container` is a string selector that uniquely identifies the pjax container.
-3. `options` is an object with keys described below.
+1. `selector` 定义点击click[事件代理]的字符串[$.fn.on].
+2. `container` 定义pjax 容器的唯一标识.
+3. `options` 是一个对象参数集合，具体如下.
 
 ##### pjax options
 
-key | default | 描述
+key | 默认值 | 描述
 ----|---------|------------
-`timeout` | 650 | ajax timeout in milliseconds after which a full refresh is forced
-`push` | true | use [pushState][] to add a browser history entry upon navigation
-`replace` | false | replace URL without adding browser history entry
-`maxCacheLength` | 20 | maximum cache size for previous container contents
-`version` | | a string or function returning the current pjax version
-`scrollTo` | 0 | vertical position to scroll to after navigation. To avoid changing scroll position, pass `false`.
+`timeout` | 650 | ajax 请求超时的毫秒数，超过这个时间将会URL重载的方式进入
+`push` | true | 导航的时候，使用 [pushState][] 来添加浏览器历史纪录
+`replace` | false | 替换URL地址，不修改浏览器历史记录
+`maxCacheLength` | 20 | 容器的最大缓存值
+`version` | | 当前pjax的版本号
+`scrollTo` | 0 | 导航之后垂直方向滚动到的值. 设为`false` 不改变滚动位置.
 `type` | `"GET"` | see [$.ajax][]
 `dataType` | `"html"` | see [$.ajax][]
 `container` | | CSS selector for the element where content should be replaced
