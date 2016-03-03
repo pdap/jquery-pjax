@@ -165,12 +165,12 @@ key | 默认值 | 描述
 `scrollTo` | 0 | 导航之后垂直方向滚动到的值. 设为`false` 不改变滚动位置.
 `type` | `"GET"` | see [$.ajax][]
 `dataType` | `"html"` | see [$.ajax][]
-`container` | | CSS selector for the element where content should be replaced
-`url` | link.href | a string or function that returns the URL for the ajax request
-`target` | link | eventually the `relatedTarget` value for [pjax events](#events)
+`container` | | 指明要替换的容器的css选择器字符串
+`url` | link.href | 用于ajax请求的字符串，或者函数
+`target` | link | eventually the `relatedTarget` value for [pjax events](#事件)
 `fragment` | | CSS selector for the fragment to extract from ajax response
 
-You can change the defaults globally by writing to the `$.pjax.defaults` object:
+通过 `$.pjax.defaults` object 改变全局默认值:
 
 ``` javascript
 $.pjax.defaults.timeout = 1200
@@ -178,7 +178,7 @@ $.pjax.defaults.timeout = 1200
 
 ### `$.pjax.click`
 
-This is a lower level function used by `$.fn.pjax` itself. It allows you to get a little more control over the pjax event handling.
+ 是`$.fn.pjax`自己调用的底层函数. 允许你更进一步控制pjax 事件的处理.
 
 This example uses the current click context to set an ancestor as the container:
 
@@ -195,7 +195,7 @@ if ($.support.pjax) {
 
 ### `$.pjax.submit`
 
-Submits a form via pjax.
+通过pjax提交表单.
 
 ``` javascript
 $(document).on('submit', 'form[data-pjax]', function(event) {
